@@ -1,8 +1,134 @@
 # 미션 기록
 
+`prisma/schema.prisma`
+
+```jsx
+model User {
+  id            Int      @id @default(autoincrement())
+  email         String   @unique(map: "email") @db.VarChar(255)
+  name          String   @db.VarChar(100)
+  gender        String   @db.VarChar(15)
+  birth         DateTime @db.Date
+  address       String   @db.VarChar(255)
+  detailAddress String?  @map("detail_address") @db.VarChar(255)
+  phoneNumber   String   @map("phone_number") @db.VarChar(15)
+
+  userFavorCategories UserFavorCategory[]
+  reviews             UserStoreReview[] 
+  userMissions        UserMission[]
+
+  @@map("user")
+}
+
+model FoodCategory {
+  id   Int    @id @default(autoincrement())
+  name String @db.VarChar(100)
+
+  userFavorCategories UserFavorCategory[]
+
+  @@map("food_category")
+}
+
+model UserFavorCategory {
+  id             Int          @id @default(autoincrement())
+  user           User         @relation(fields: [userId], references: [id])
+  userId         Int          @map("user_id")
+  foodCategory   FoodCategory @relation(fields: [foodCategoryId], references: [id])
+  foodCategoryId Int          @map("food_category_id")
+
+  @@index([foodCategoryId], map: "f_category_id")
+  @@index([userId], map: "user_id")
+  @@map("user_favor_category")
+}
+
+model Region {
+  id     Int     @id @default(autoincrement())
+  name   String  @db.VarChar(100)
+  stores Store[]
+
+  @@map("region")
+}
+
+model Store {
+  id        Int               @id @default(autoincrement())
+  name      String            @db.VarChar(100)
+  number    String?           @db.VarChar(50)
+  thumbnail String?           @db.VarChar(255)
+  work_time String?           @db.VarChar(255)
+  address   String?           @db.VarChar(255)
+
+  region_id Int
+  region    Region            @relation(fields: [region_id], references: [id])
+
+  reviews   UserStoreReview[]
+  missions   Mission[]
+  @@map("store")
+}
+
+model UserStoreReview {
+  id        Int    @id @default(autoincrement())
+  store     Store  @relation(fields: [storeId], references: [id])
+  storeId   Int    @map("store_id")
+  user      User   @relation(fields: [userId], references: [id])
+  userId    Int    @map("user_id")
+  content   String @db.Text
+
+  star      Int?     @db.TinyInt
+  imageUrl  String?  @db.VarChar(255)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("user_store_review")
+}
+
+model Mission {
+  id         Int      @id @default(autoincrement())
+  store      Store    @relation(fields: [storeId], references: [id])
+  storeId    Int      @map("store_id")
+  status     String   @default("pending") @db.VarChar(50)
+  content    String   @db.Text
+  deadline   DateTime
+  point      Int      @default(0)
+  createdAt  DateTime @default(now()) @map("created_at")
+  updatedAt  DateTime @updatedAt @map("updated_at")
+
+  userMissions        UserMission[]
+  @@map("mission")
+}
+
+enum UserMissionStatus {
+  pending      // 진행 전
+  in_progress  // 진행 중
+  completed    // 완료
+}
+
+model UserMission {
+  id        Int               @id @default(autoincrement())
+  user      User              @relation(fields: [userId], references: [id])
+  userId    Int               @map("user_id")
+  mission   Mission           @relation(fields: [missionId], references: [id])
+  missionId Int               @map("mission_id")
+  status    UserMissionStatus @default(pending)
+  createdAt DateTime          @default(now()) @map("created_at")
+
+  @@map("user_mission")
+  @@unique([userId, missionId]) 
+}
+```
+
+- id: autoincrement로 변경
+- usermission status: boolean → enum 변경
+    
+    
+    | enum 값 | 의미 |
+    | --- | --- |
+    | `pending` | 진행 전 |
+    | `in_progress` | 진행 중 |
+    | `completed` | 완료 |
+
 **커서 기반 페이지네이션 사용**
 
 **클라이언트 요청 → 컨트롤러 → 서비스 → 레포지토리 → dto**
+
 
 ### 내가 작성한 리뷰 목록 조회
 
