@@ -23,14 +23,14 @@ export const handleListUserMissionsInProgress = async (req, res) => {
 
 ```
 
-POST api (생성)
+POST api (5주차 api)
 
 - 성공 시 201(CREATED)
 - 에러 발생 시 catch(err)로 들어옴
 - catch 블록에서 next(err) 호출 시 Express가 전역 에러 핸들러로 이동(app.use)
 - 전역 에러 핸들러에서는 res.error(…)를 통해 클라이언트에 최종 JSON 응답 반환
 
-GET api (조회)
+GET api (6주차 api)
 
 - 성공 시 200(OK)
 
