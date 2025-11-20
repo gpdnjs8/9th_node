@@ -16,13 +16,13 @@
 
 ![스크린샷(256).png](https://github.com/user-attachments/assets/623d98b0-fe3e-40f2-a42e-3702d5123aa3)
 
-![스크린샷(257).png](https://github.com/user-attachments/assets/aa1864f0-a3a7-4c3b-9cd4-3779f7be049)
+![스크린샷(257).png](https://github.com/user-attachments/assets/9f6ca583-5ed4-4b08-9b62-10782cf01205)
 
 ### 가게에 미션 추가 API
 
 ![스크린샷(258).png](https://github.com/user-attachments/assets/46d1d3fb-4b92-4f97-93f7-af437c8f72fb)
 
-![스크린샷(259).png](https://github.com/user-attachments/assets/dfe2aea3-021b-48c6-a336-70a69293ef0)
+![스크린샷(259).png](https://github.com/user-attachments/assets/d167dcbc-1a06-480a-bd53-ac5957735c3f)
 
 ### 가게의 미션을 도전 중인 미션에 추가 API
 
@@ -58,13 +58,13 @@
 
 ![스크린샷(266).png](https://github.com/user-attachments/assets/e03fa28d-20c1-4e09-8d0c-6e5fd219c9f0)
 
-![스크린샷(267).png](https://github.com/user-attachments/assets/3cd4e2dc-6b12-4618-87ad-348ce782e98)
+![스크린샷(267).png](https://github.com/user-attachments/assets/86fb5c5f-8ee0-4831-8d1e-c0959462686f)
 
 **실행 결과**
 
 성공
 
-![스크린샷(277).png](https://github.com/user-attachments/assets/fb6dbc18-12c2-4601-a18f-644ce2dfd52)
+![스크린샷(277).png](https://github.com/user-attachments/assets/194db113-529f-42d1-b796-3867abfc5146)
 
 실패(가게 존재x)
 
